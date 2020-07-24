@@ -27,4 +27,20 @@ Outputs:
   - When the game ends, output the original color code and a game-won or game-lost message.
 
 Necessary steps:
-  - TODO
+  1) Display the intructions and rules of the game.
+  2) Ask user for desired game mode
+    - Code-maker or Code-breaker?
+  3) If the player chooses code-maker, ask the player to generate the 4 "peg" code.
+    - Else, generate a random 4 "peg" code.
+    - 6 possible color choices: red, blue, green, yellow, cyan, magenta. The colors can be unique or duplicates.
+  4) Ask user for maximum number of guesses.
+    - 8, 10, or 12.
+  5) Start the game loop by checking whether the human is the code-breaker or maker, and if max guesses has been reached.
+    - If the player is the the code-breaker, prompt for a guess.
+    - After the guess, check if the guess is correct. If yes, declare winner and end game.
+      If not correct, provide feedback on the user's guess. 
+    - Prompt for another guess until max guesses reached or a correct guess.
+  5b) If AI is the code-breaker, start game loop for the computer and check if max guesses reached.
+    - After each guess is made, check for correctness and provide feedback.
+    - Sleep for a brief moment between guesses so the game doesn't instantly end
+    - Continue until max guesses reached or a correct guess.
