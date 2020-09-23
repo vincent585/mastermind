@@ -8,7 +8,7 @@ class Player
   end
 
   def guess
-    player_guess = gets.chomp.downcase
+    player_guess = gets.chomp.downcase.split("")
     until valid_guess?(player_guess)
       puts "Please enter a valid sequence!"
       player_guess = gets.chomp.downcase
@@ -20,7 +20,7 @@ class Player
 
   def valid_guess?(player_guess)
     return false if player_guess.length != 4
-    player_guess.chars.each do |char|
+    player_guess.each do |char|
       return false unless Board::COLOR_PEGS.include?(char)
     end
     true
