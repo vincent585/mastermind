@@ -1,10 +1,8 @@
 require_relative 'player'
-require 'pry'
 
 class Board
-
   # r = red | g = green | b = blue | y = yellow | c = cyan | m = magenta |
-  COLOR_PEGS = ["r", "g", "b", "y", "c", "m"]
+  COLOR_PEGS = %w[r g b y c m].freeze
 
   def initialize
     @color_code = computer_create_board
@@ -12,6 +10,7 @@ class Board
 
   def correct_guess?(player_guess)
     return true if player_guess == color_code
+
     display_feedback(guess_feedback(player_guess))
     false
   end
@@ -21,15 +20,15 @@ class Board
   attr_reader :color_code
 
   def black_pegs(guess, code)
-    guess.map.with_index { |color, i| "BLACK" if color == code[i] }
+    guess.map.with_index { |color, i| 'BLACK' if color == code[i] }
   end
 
   def white_pegs(guess, code)
     guess.map do |color|
       i = code.index(color)
       unless i.nil?
-        code[i] = "X"
-        "WHITE"
+        code[i] = 'X'
+        'WHITE'
       end
     end
   end
@@ -41,14 +40,12 @@ class Board
   end
 
   def display_feedback(feedback)
-    puts "#{feedback[0]} black --- #{feedback[1]} white"
+    puts "Black: #{feedback[0]}     White: #{feedback[1]}"
   end
-
 
   def computer_create_board
     code = []
     4.times { code.push(COLOR_PEGS.sample) }
-    p code
+    code
   end
-
 end

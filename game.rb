@@ -2,7 +2,6 @@ require_relative 'board'
 require_relative 'player'
 
 class Game
-
   def initialize
     display_instructions
     @board = Board.new
@@ -13,6 +12,7 @@ class Game
     current_turn = 0
     loop do
       return game_lost if current_turn == 12
+
       puts "Guess a sequence of 4 colors like so: 'rgby'"
       current_turn += 1
       return game_won if board.correct_guess?(player.guess)
@@ -49,11 +49,9 @@ class Game
   end
 
   def game_won
-    puts "You cracked the code! Nice work, Hacker!"
+    puts 'You cracked the code! Nice work, Hacker!'
   end
-
 end
 
 test = Game.new
 test.play_game
-
