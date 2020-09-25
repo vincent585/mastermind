@@ -1,11 +1,9 @@
-require_relative 'player'
-
 class Board
   # r = red | g = green | b = blue | y = yellow | c = cyan | m = magenta |
   COLOR_PEGS = %w[r g b y c m].freeze
 
   def initialize
-    @color_code = computer_create_board
+    @color_code = player_create_board
   end
 
   def correct_guess?(player_guess)
@@ -43,9 +41,32 @@ class Board
     puts "Black: #{feedback[0]}     White: #{feedback[1]}"
   end
 
+  def player_create_board
+    display_board_rules
+    colors = gets.chomp.downcase.split('')
+    until valid_code?(colors)
+      puts 'Please enter a valid code!'
+      colors = gets.chomp.downcase.split('')
+    end
+    colors
+  end
+
+  def valid_code?(colors)
+    return false unless colors.length == 4
+
+    colors.all? { |color| COLOR_PEGS.include?(color) }
+  end
+
+  def display_board_rules
+    puts 'Choose a secret code! Acceptable inputs are r, g, b, y, m, c.'
+    puts 'You may also include duplicates in your code.'
+  end
+
   def computer_create_board
     code = []
     4.times { code.push(COLOR_PEGS.sample) }
     code
   end
 end
+
+foo = Board.new

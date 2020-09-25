@@ -1,5 +1,3 @@
-require_relative 'board'
-
 class Player
   def initialize
     puts "What's your name?"
