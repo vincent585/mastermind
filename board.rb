@@ -2,8 +2,8 @@ class Board
   # r = red | g = green | b = blue | y = yellow | c = cyan | m = magenta |
   COLOR_PEGS = %w[r g b y c m].freeze
 
-  def initialize
-    @color_code = player_create_board
+  def initialize(game_mode)
+    @color_code = game_mode == 1 ? computer_create_board : player_create_board
   end
 
   def correct_guess?(player_guess)
@@ -68,5 +68,3 @@ class Board
     code
   end
 end
-
-foo = Board.new

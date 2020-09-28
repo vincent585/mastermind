@@ -1,29 +1,25 @@
 require_relative 'board'
 require_relative 'player'
+require_relative 'computer'
 
 class Game
+  attr_reader :game_type
+
   def initialize
-    @game_type = choose_game_mode
     display_instructions
-    @board = Board.new
+    @game_type = choose_game_mode
     @player = Player.new
+    @computer = Computer.new('Alfredo')
+    @board = Board.new(game_type)
   end
 
   def play_game
-    current_turn = 0
-    loop do
-      return game_lost if current_turn == 12
-
-      puts "Guess a sequence of 4 colors like so: 'rgby'"
-      current_turn += 1
-      return game_won if board.correct_guess?(player.guess)
-      # TODO
-    end
+    game_type == 1 ? play_codebreaker : play_codemaker
   end
 
   private
 
-  attr_reader :player, :board
+  attr_reader :player, :board, :computer
 
   def display_instructions
     puts <<-HEREDOC
@@ -56,6 +52,34 @@ class Game
     game_mode
   end
 
+  def check_game_mode(game_mode)
+    game_mode == 1 ? play_codebreaker : play_codemaker
+  end
+
+  def play_codebreaker
+    current_turn = 0
+    loop do
+      return game_lost if current_turn == 12
+
+      puts "Guess a sequence of 4 colors like so: 'rgby'"
+      current_turn += 1
+      return game_won if board.correct_guess?(player.guess)
+      # TODO
+    end
+  end
+
+  def play_codemaker
+    current_turn = 0
+    loop do
+      return computer_lost_game if current_turn == 12
+
+      puts 'Computer is attempting to crack your secret code...'
+      sleep(1)
+      current_turn += 1
+      return computer_won_game if board.correct_guess?(computer.computer_guess)
+    end
+  end
+
   def valid_mode?(game_mode)
     [1, 2].include?(game_mode) ? true : false
   end
@@ -67,6 +91,15 @@ class Game
   def game_won
     puts 'You cracked the code! Nice work, Hacker!'
   end
+
+  def computer_won_game
+    puts 'The computer cracked your code! Better luck next time.'
+  end
+
+  def computer_lost_game
+    puts 'You outsmarted a computer! Score one for humanity!'
+  end
 end
 
-b = Board.new
+g = Game.new
+g.play_game
