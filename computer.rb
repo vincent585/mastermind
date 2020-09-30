@@ -22,7 +22,7 @@ class Computer
 
       new_guess[index] = Board::COLOR_PEGS.sample
     end
-    puts "Alfredo's guess is #{new_guess}"
+    puts "Alfredo's guess is: #{new_guess.join(', ')}"
     new_guess
   end
 end
