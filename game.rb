@@ -63,20 +63,21 @@ class Game
 
       puts "Guess a sequence of 4 colors like so: 'rgby'"
       current_turn += 1
-      return game_won if board.correct_guess?(player.guess)
+      return game_won if board.player_correct_guess?(player.guess)
       # TODO
     end
   end
 
   def play_codemaker
     current_turn = 0
+    guess = computer.computer_guess
     loop do
       return computer_lost_game if current_turn == 12
 
-      puts 'Computer is attempting to crack your secret code...'
-      sleep(1)
       current_turn += 1
-      return computer_won_game if board.correct_guess?(computer.computer_guess)
+      return computer_won_game if board.correct_guess?(guess)
+
+      guess = computer.improve_guess(guess, board.computer_feedback(guess))
     end
   end
 

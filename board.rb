@@ -6,11 +6,19 @@ class Board
     @color_code = game_mode == 1 ? computer_create_board : player_create_board
   end
 
-  def correct_guess?(player_guess)
+  def player_correct_guess?(player_guess)
     return true if player_guess == color_code
 
     display_feedback(guess_feedback(player_guess))
     false
+  end
+
+  def correct_guess?(comp_guess)
+    comp_guess == color_code
+  end
+
+  def computer_feedback(comp_guess)
+    black_pegs(comp_guess, color_code)
   end
 
   private

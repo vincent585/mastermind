@@ -44,3 +44,9 @@ Necessary steps:
     - After each guess is made, check for correctness and provide feedback.
     - Sleep for a brief moment between guesses so the game doesn't instantly end
     - Continue until max guesses reached or a correct guess.
+
+
+  TODO:
+    1) Improve AI. Currently, it just keeps the exact matches and randomly selects more colors until it hits a match.
+       Eventually, I will include Knuth's 5-turn algorithm.
+    2) Improve the GUI. This can be done by utilizing the `colorize` gem.
