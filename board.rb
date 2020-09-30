@@ -17,6 +17,10 @@ class Board
     comp_guess == color_code
   end
 
+  def show_color_code
+    color_code.join(', ')
+  end
+
   def computer_feedback(comp_guess)
     black_pegs(comp_guess, color_code)
   end

@@ -64,7 +64,6 @@ class Game
       puts "Guess a sequence of 4 colors like so: 'rgby'"
       current_turn += 1
       return game_won if board.player_correct_guess?(player.guess)
-      # TODO
     end
   end
 
@@ -87,6 +86,7 @@ class Game
 
   def game_lost
     puts "You didn't crack the code in time! Game over!"
+    puts "The secret code was #{board.show_color_code}"
   end
 
   def game_won
